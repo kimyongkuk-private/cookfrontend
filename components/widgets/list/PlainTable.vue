@@ -31,6 +31,7 @@
               </v-btn>
               <v-btn flat icon color="grey">
                 <v-icon>delete</v-icon>
+                <v-icon>event_note</v-icon>
               </v-btn>
             </td>
           </template>
