@@ -3,19 +3,33 @@
     <v-toolbar card dense color="transparent">
       <v-toolbar-title><h4>업무</h4></v-toolbar-title>
       <v-spacer></v-spacer>
+        <v-text-field
+        v-model="search"
+        append-icon="search"
+        label="검색"
+        single-line
+        hide-details
+      ></v-text-field>
       <v-btn icon>
         <v-icon>more_vert</v-icon>
       </v-btn>
     </v-toolbar>
+
+
+
     <v-divider></v-divider>
+
     <v-card-text class="pa-0">
       <template>
         <v-data-table
           :headers="headers"
           :items="projects"
-          hide-actions
+          :search="search"
+          no-data-text="데이터가 없습니다."
+          no-results-text="검색 결과가 없습니다."
           class="elevation-0"
         >
+        <v-progress-linear v-slot:progress color="blue" indeterminate></v-progress-linear>
           <template slot="items" slot-scope="props">
             <td>
               <v-avatar size="36px">
@@ -36,7 +50,9 @@
             </td>
           </template>
         </v-data-table>
+
       </template>
+
       <v-divider></v-divider>
     </v-card-text>
   </v-card>
@@ -49,6 +65,7 @@ import 'assets/style/components/plain_table.styl';
 export default {
   data () {
     return {
+      search: '',
       headers: [
         {
           text: '',
