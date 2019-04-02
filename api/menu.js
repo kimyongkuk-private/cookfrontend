@@ -8,6 +8,20 @@ const Menu = [
     href: '/main'
   },
   {
+    title: 'Individual',
+    group: 'apps',
+    icon: 'person',
+    name: 'Individual',
+    href: '/individual'
+  },
+  {
+    title: 'Calendal',
+    group: 'apps',
+    icon: 'calendar_today',
+    name: 'Calendal',
+    href: '/calendal'
+  },
+  {
     title: 'Dashboard',
     group: 'apps',
     icon: 'dashboard',
