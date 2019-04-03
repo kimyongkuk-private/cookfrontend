@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-toolbar card dense color="transparent">
-      <v-toolbar-title class="hidden-xs-only"><h4>주문</h4></v-toolbar-title>
+      <v-toolbar-title class="hidden-xs-only"><h4>{{titleData}}</h4></v-toolbar-title>
       <v-spacer></v-spacer>
         <v-text-field
         v-model="search"
@@ -18,8 +18,8 @@
     <v-card-text class="pa-0">
       <template>
         <v-data-table
-          :headers="headers"
-          :items="items"
+          :headers="headerData"
+          :items="data"
           :search="search"
           :expand="expand"
           no-data-text="데이터가 없습니다."
@@ -66,37 +66,15 @@
 </template>
 
 <script>
-import items from '@/api/order';
 export default {
-  data () {
+  props: ['titleData','headerData','data','colors'],
+  data: function () {
     return {
       search: '',
-      headers: [
-        { text: '담당자', value: 'manager' },
-        { text: '배송사원', value: 'staff' },
-        { text: '물품', value: 'product' },
-        { text: '규격', value: 'standard' },
-        { text: '위치', value: 'location' },
-        { text: '가격', value: 'price' },
-        { text: '결제', value: 'payment' },
-        { text: '상태', value: 'status' },
-      ],
-      items: items,
-      colors: {
-        '미결제': 'red',
-        '메모참고': 'yellow',
-        '결제완료': 'green',
-        '배송중': 'blue',
-        '대기': 'red',
-        '배송완료': 'green'
-      }
+      expand: false
     };
   },
   computed: {
-    randomColor () {
-      let item = Math.floor(Math.random() * this.colors.length);
-      return this.colors[item];
-    },
   },
   methods: {
     getColorByStatus (status) {

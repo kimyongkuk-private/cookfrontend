@@ -1,4 +1,4 @@
-export default [
+const Order  =  [
   {
     id: '5',
     manager: '김용국',
@@ -54,6 +54,14 @@ export default [
     status: '배송완료',
     memo:'국회는 의원의 자격을 심사하며, 의원을 징계할 수 있다. 대한민국의 주권은 국민에게 있고, 모든 권력은 국민으로부터 나온다.'
   },
-
-
 ];
+
+const getOrder = (limit) => {
+  return (limit) ? Order .slice(0, limit) : Order ;
+};
+
+
+export {
+  Order ,
+  getOrder 
+};

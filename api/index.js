@@ -1,5 +1,6 @@
 // implement your own methods in here, if your data is coming from A rest API
 
+import * as Order from './order';
 import * as User from './user';
 import * as Activity from './activity';
 import * as Chat from './chat';
@@ -9,6 +10,8 @@ import * as Post from './post';
 import * as Chart from './chart';
 import * as Project from './project';
 export default {
+  // order
+  getOrder: Order.getOrder,
   // user
   getUser: User.getUser,
   getUserById: User.getUserById,

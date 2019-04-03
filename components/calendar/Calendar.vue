@@ -1,18 +1,28 @@
 <template>
   <v-layout>
+
     <v-flex>
-      <v-sheet>
+      <v-sheet height="750">
         <v-calendar
+          locale="ko-kr"
           :now="today"
           :value="today"
           color="primary"
-          type="day"
-        >
+          first-interval="12"
+          interval-count="32"
+          interval-minutes="30"
+          type="day">
+                     <template v-slot:dayHeader="{ present }">
+                        <template
+                          v-if="present"
+                          class="text-xs-center">Today</template>
+                        </template>
+                        
               <template v-slot:interval="{ time }">
-              <template  v-for="event in eventsMap[time]">
+              <template v-for="event in eventsMap[time]">
                                     
               <v-menu
-                :key="event.id"
+                :key="event.title"
                 v-model="event.open"
                 full-width
                 offset-x
@@ -63,8 +73,60 @@
         </v-calendar>
       </v-sheet>
     </v-flex>
+            <v-flex></v-flex>
   </v-layout>
 </template>
+
+<script>
+  export default {
+    data: () => ({
+      today: '2019-04-03',
+      events: [
+        {
+          title: '일정1',
+          details: '일정1 details',
+          date: '2019-04-03',
+          hour: '09:00',
+          open: false
+        },
+        {
+          title: '일정2',
+          date: '2019-04-03',
+          details: '일정2 details',
+          hour: '11:00',
+          open: false
+        },
+        {
+          title: '일정2',
+          date: '2019-04-03',
+          details: '일정2 details',
+          hour: '11:00',
+          open: false
+        },
+        {
+          title: '일정3',
+          date: '2019-04-03',
+          details: '일정3 details',
+          hour: '12:00',
+          open: false
+        }
+      ]
+    }),
+    computed: {
+      // convert the list of events into a map of lists keyed by date
+      eventsMap () {
+        const map = {}
+        this.events.forEach(e => (map[e.hour] = map[e.hour] || []).push(e))
+        return map
+      }
+    },
+    methods: {
+      open (event) {
+        alert(event.title)
+      }
+    }
+  }
+</script>
 
 <style lang="stylus" scoped>
   .my-event {
@@ -82,47 +144,3 @@
     margin-bottom: 1px;
   }
 </style>
-<script>
-  export default {
-    data: () => ({
-      today: '2019-04-01',
-      events: [
-        { id:'1',
-          title: 'Weekly Meeting',
-          details: 'Going to the beach!',
-          date: '2019-04-01',
-          time: '09:00',
-          duration: 45,
-          open: false
-        },
-        { id:'2',
-          title: 'Thomas\' Birthday',
-          date: '2019-04-01',
-          time: '09:00',
-          duration: 45,
-          open: false
-        },
-        { id:'3',
-          title: 'Mash Potatoes',
-          date: '2019-04-01',
-          time: '12:00',
-          duration: 180,
-          open: false
-        }
-      ]
-    }),
-    computed: {
-      // convert the list of events into a map of lists keyed by date
-      eventsMap () {
-        const map = {}
-        this.events.forEach(e => (map[e.time] = map[e.time] || []).push(e))
-        return map
-      }
-    },
-    methods: {
-      open (event) {
-        alert(event.title)
-      }
-    }
-  }
-</script>
