@@ -38,6 +38,17 @@ module.exports = {
       user: '/profile',
       callback:'/'
     }},
+    workbox: {
+      // Workbox options
+      importScripts: [
+        'custom-sw.js'
+      ],
+      manifest: {
+        crossorigin: 'use-credentials'
+      },
+      runtimeCaching: [
+    ]
+     },
   /*
   ** Customize the progress-bar color
   */
@@ -88,7 +99,8 @@ module.exports = {
   */
   plugins: [
     '@/plugins/vuetify',
-    '@/plugins/vee-validate'
+    '@/plugins/vee-validate',
+    
   ],
 
   /*
@@ -97,7 +109,8 @@ module.exports = {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    '@nuxtjs/toast'
+    '@nuxtjs/toast',
+    ['@nuxtjs/pwa', { icon: false}]
   ],
 
   /*
